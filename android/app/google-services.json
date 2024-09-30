@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1070912617929",
+    "project_id": "grofast-4a51c",
+    "storage_bucket": "grofast-4a51c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1070912617929:android:373e0ad254f16244907c18",
+        "android_client_info": {
+          "package_name": "uz.grofast.grofast"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQSSQZY-L5_4UKtNUXKcpQQJT9qOiWxps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
