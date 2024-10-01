@@ -8,7 +8,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 final GetIt getIt = GetIt.instance;
 
 class DependencySetup {
- static void init() {
+  static void init() {
     getIt.registerLazySingleton(
       () => Dio()
         ..options = BaseOptions(

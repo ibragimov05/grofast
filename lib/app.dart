@@ -1,11 +1,31 @@
-import 'package:flutter/material.dart';
+part of 'main.dart';
 
-import 'core/l10n/localization.dart';
-import 'core/theme/theme.dart';
-import 'router/app_router.dart';
-
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (kDebugMode) {
+        print("Got a message whilst in the foreground!");
+      }
+      showNotification(message);
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      if (kDebugMode) {
+        print("Opened app from notification!");
+      }
+      // Navigate to relevant page or show dialog based on the message
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
