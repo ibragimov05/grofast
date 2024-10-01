@@ -1,5 +1,5 @@
-part of 'main.dart';
 
+part of 'main.dart';
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -23,7 +23,6 @@ class _AppState extends State<App> {
       if (kDebugMode) {
         print("Opened app from notification!");
       }
-      // Navigate to relevant page or show dialog based on the message
     });
   }
 

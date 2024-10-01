@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:grofast/core/theme/theme_data.dart';
 
 import 'core/l10n/localization.dart';
+import 'firebase_options.dart';
 import 'router/app_router.dart';
 
 part 'app.dart';
@@ -42,37 +44,25 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+    FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(const AndroidNotificationChannel(
-        'high_importance_channel',
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(const AndroidNotificationChannel(
+          'high_importance_channel',
         'High Importance Notifications',
         importance: Importance.high,
       ));
-
-  // try {
-  //     await Firebase.initializeApp(
-  //       options: DefaultFirebaseOptions.currentPlatform,
-  //     );
-  //     await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
-  //
-  //     final firebaseAPI = FirebaseApi();
-  //
-  //     firebaseAPI.initNotifications();
-  //
-  //     // await FirebaseMessaging.instance.getInitialMessage();
-  //     // await FirebaseMessaging.instance.requestPermission();
-  //     // await NotificationService.initNotification();
-  //
-  //     // _getToken();
-  //   } catch(e) {
-  //     print("Failed to initialize Firebase: $e");
-  //   }
+  } catch (e) {
+    print("Failed to initialize Firebase: $e");
+  }
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
