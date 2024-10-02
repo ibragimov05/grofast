@@ -1,4 +1,12 @@
-part of 'main.dart';
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'core/theme/theme.dart';
+import 'router/app_router.dart';
+import 'services/services.dart';
+import 'core/l10n/localization.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -12,15 +20,13 @@ class _AppState extends State<App> {
   void initState() {
     super.initState();
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print("Got a message whilst in the foreground!");
-      showNotification(message);
-    });
+    FirebaseMessaging.onMessage.listen(
+      (RemoteMessage message) => NotificationService.showNotification(message),
+    );
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Opened app from notification!");
-      // Navigate to relevant page or show dialog based on the message
-    });
+    FirebaseMessaging.onMessageOpenedApp.listen(
+      (RemoteMessage message) => log("Opened app from notification!"),
+    );
   }
 
   @override
