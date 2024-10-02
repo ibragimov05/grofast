@@ -75,6 +75,7 @@ dependencies:
 
   # splash
   flutter_native_splash: ^2.4.1
+  logger: ^2.4.0
 
 dev_dependencies:
   flutter_test:
