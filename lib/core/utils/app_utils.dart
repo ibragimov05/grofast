@@ -33,6 +33,7 @@ sealed class AppUtils {
   static const EdgeInsets kPaddingHor10 = EdgeInsets.symmetric(horizontal: 10);
   static const EdgeInsets kPaddingHor12 = EdgeInsets.symmetric(horizontal: 12);
   static const EdgeInsets kPaddingHor16 = EdgeInsets.symmetric(horizontal: 16);
+  static const EdgeInsets kPaddingHor24 = EdgeInsets.symmetric(horizontal: 24);
   static const EdgeInsets kPaddingVertical16 =
       EdgeInsets.symmetric(vertical: 16);
   static const EdgeInsets kPaddingHor32Ver20 =
@@ -55,6 +56,8 @@ sealed class AppUtils {
       EdgeInsets.symmetric(horizontal: 10, vertical: 3);
   static const EdgeInsets kPaddingLeft12Right6Ver8 =
       EdgeInsets.only(left: 12, right: 6, top: 8, bottom: 8);
+  static const EdgeInsets kPaddingHor20Ver16 =
+      EdgeInsets.symmetric(horizontal: 20, vertical: 16);
 
   /// border radius
   static const Radius kRadius = Radius.zero;
@@ -73,6 +76,8 @@ sealed class AppUtils {
       BorderRadius.all(Radius.circular(12));
   static const BorderRadius kBorderRadius16 =
       BorderRadius.all(Radius.circular(16));
+  static const BorderRadius kBorderRadius20 =
+      BorderRadius.all(Radius.circular(20));
   static const BorderRadius kBorderTopRadius24 = BorderRadius.only(
     topLeft: Radius.circular(24),
     topRight: Radius.circular(24),
@@ -83,6 +88,8 @@ sealed class AppUtils {
       BorderRadius.all(Radius.circular(48));
   static const BorderRadius kBorderRadius64 =
       BorderRadius.all(Radius.circular(64));
+  static const BorderRadius kBorderRadius100 =
+      BorderRadius.all(Radius.circular(100));
 
   static const RoundedRectangleBorder kShapeZero = RoundedRectangleBorder();
   static const RoundedRectangleBorder kShapeTop8 = RoundedRectangleBorder(

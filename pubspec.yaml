@@ -9,8 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   flutter_localizations:
     sdk: flutter
+
+  form_inputs:
+    path: packages/form_inputs/
 
   # state manager
   flutter_bloc: ^8.1.6
@@ -75,18 +79,24 @@ dependencies:
 
   # splash
   flutter_native_splash: ^2.4.1
+
+  # logger
   logger: ^2.4.0
+
+  # freezed
+  freezed_annotation: ^2.4.4
+  freezed: ^2.5.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^4.0.0
 
   # assets generator
   flutter_gen_runner: ^5.7.0
 
   # build runner
-  build_runner: ^2.4.12
+  build_runner: ^2.4.13
 
   # json serializable
   json_serializable: ^6.8.0
@@ -108,7 +118,7 @@ flutter:
 flutter_intl:
   enabled: true
   class_name: GeneratedLocalization
-  main_locale: uz
+  main_locale: en
   arb_dir: lib/core/l10n
   output_dir: lib/core/l10n/generated
   use_deferred_loading: false

@@ -1,0 +1,16 @@
+{
+  "@@locale": "en",
+  "localeName": "en_EN",
+  "localeCode": "en",
+  "grofast": "GROFAST",
+  "freshGrocery": "Fresh groceries to \nyour doorstep!",
+  "dumpText": "Lorem ipsum dolor sit amet, consectetur \nadipisicing elit, sed do eiusmod tempor \nincididunt ut labore et dolore.",
+  "welcomeBack": "Welcome back \nto Grofast!",
+  "emailAddress": "Email address",
+  "password": "Password",
+  "forgotPassword": "Forgot password?",
+  "orWith": "or with",
+  "newUser": "New User?",
+  "signUp": "Sign Up",
+  "signIn": "Sign in"
+}

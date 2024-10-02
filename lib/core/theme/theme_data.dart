@@ -2,12 +2,18 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:grofast/core/theme/app_colors.dart';
-import 'package:grofast/core/theme/cupertino_page_transitions_builder_custom_back_gesture_width.dart';
+
+import 'app_colors.dart';
+import 'cupertino_page_transitions_builder_custom_back_gesture_width.dart';
 
 final ThemeData lightTheme = ThemeData(
-  textTheme: GoogleFonts.ralewayTextTheme(ThemeData.light().textTheme),
+  textTheme: GoogleFonts.ralewayTextTheme(),
   useMaterial3: true,
+  textSelectionTheme: TextSelectionThemeData(
+    selectionHandleColor: AppColors.c32CB4B,
+    selectionColor: AppColors.c32CB4B.withOpacity(0.3),
+    cursorColor: AppColors.c32CB4B,
+  ),
   pageTransitionsTheme: const PageTransitionsTheme(
     builders: <TargetPlatform, PageTransitionsBuilder>{
       TargetPlatform.android:
@@ -17,10 +23,11 @@ final ThemeData lightTheme = ThemeData(
     },
   ),
   scaffoldBackgroundColor: AppColors.white,
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     elevation: 0,
     scrolledUnderElevation: 0,
     centerTitle: true,
+    backgroundColor: AppColors.white,
   ),
   actionIconTheme: ActionIconThemeData(
     backButtonIconBuilder: (BuildContext context) => IconButton(
@@ -33,5 +40,5 @@ final ThemeData lightTheme = ThemeData(
 );
 
 final ThemeData darkTheme = ThemeData.dark().copyWith(
-  textTheme: GoogleFonts.ralewayTextTheme(ThemeData.dark().textTheme),
+  textTheme: GoogleFonts.ralewayTextTheme(),
 );

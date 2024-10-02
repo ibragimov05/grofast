@@ -51,20 +51,20 @@ class GeneratedLocalization {
         context, GeneratedLocalization);
   }
 
-  /// `uz_UZ`
+  /// `en_EN`
   String get localeName {
     return Intl.message(
-      'uz_UZ',
+      'en_EN',
       name: 'localeName',
       desc: '',
       args: [],
     );
   }
 
-  /// `uz`
+  /// `en`
   String get localeCode {
     return Intl.message(
-      'uz',
+      'en',
       name: 'localeCode',
       desc: '',
       args: [],
@@ -80,6 +80,106 @@ class GeneratedLocalization {
       args: [],
     );
   }
+
+  /// `Fresh groceries to \nyour doorstep!`
+  String get freshGrocery {
+    return Intl.message(
+      'Fresh groceries to \nyour doorstep!',
+      name: 'freshGrocery',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lorem ipsum dolor sit amet, consectetur \nadipisicing elit, sed do eiusmod tempor \nincididunt ut labore et dolore.`
+  String get dumpText {
+    return Intl.message(
+      'Lorem ipsum dolor sit amet, consectetur \nadipisicing elit, sed do eiusmod tempor \nincididunt ut labore et dolore.',
+      name: 'dumpText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back \nto Grofast!`
+  String get welcomeBack {
+    return Intl.message(
+      'Welcome back \nto Grofast!',
+      name: 'welcomeBack',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address`
+  String get emailAddress {
+    return Intl.message(
+      'Email address',
+      name: 'emailAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password`
+  String get password {
+    return Intl.message(
+      'Password',
+      name: 'password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forgot password?`
+  String get forgotPassword {
+    return Intl.message(
+      'Forgot password?',
+      name: 'forgotPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `or with`
+  String get orWith {
+    return Intl.message(
+      'or with',
+      name: 'orWith',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `New User?`
+  String get newUser {
+    return Intl.message(
+      'New User?',
+      name: 'newUser',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get signUp {
+    return Intl.message(
+      'Sign Up',
+      name: 'signUp',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign in`
+  String get signIn {
+    return Intl.message(
+      'Sign in',
+      name: 'signIn',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate
@@ -88,8 +188,7 @@ class AppLocalizationDelegate
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'uz'),
-      Locale.fromSubtags(languageCode: 'ru'),
+      Locale.fromSubtags(languageCode: 'en'),
     ];
   }
 

@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/foundation.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:grofast/features/auth/presentation/logic/cubit/login/login_cubit.dart';
 
 final GetIt getIt = GetIt.instance;
 
@@ -35,5 +36,6 @@ class DependencySetup {
     /// registering blocs
 
     /// registering cubits
+    getIt.registerLazySingleton(() => LoginCubit());
   }
 }

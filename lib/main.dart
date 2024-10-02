@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:grofast/dependency_setup.dart';
 import 'package:grofast/services/services.dart';
 
 import 'app.dart';
@@ -22,6 +23,8 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  DependencySetup.init();
+
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -37,7 +40,7 @@ void main() async {
     log("Failed to initialize Firebase: $e");
   }
 
-  runApp(App());
+  runApp(const App());
 
   FlutterNativeSplash.remove();
 }
