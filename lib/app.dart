@@ -1,5 +1,5 @@
-
 part of 'main.dart';
+
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -13,16 +13,13 @@ class _AppState extends State<App> {
     super.initState();
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      if (kDebugMode) {
-        print("Got a message whilst in the foreground!");
-      }
+      print("Got a message whilst in the foreground!");
       showNotification(message);
     });
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      if (kDebugMode) {
-        print("Opened app from notification!");
-      }
+      print("Opened app from notification!");
+      // Navigate to relevant page or show dialog based on the message
     });
   }
 

@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:grofast/core/theme/theme_data.dart';
 
 import 'core/l10n/localization.dart';
@@ -33,6 +35,7 @@ Future<void> showNotification(RemoteMessage message) async {
           'High Importance Notifications',
           importance: Importance.high,
           priority: Priority.high,
+          icon: 'ic_notification',
         ),
       ),
     );
@@ -40,10 +43,11 @@ Future<void> showNotification(RemoteMessage message) async {
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin();
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   try {
     await Firebase.initializeApp(
@@ -52,17 +56,29 @@ void main() async {
     await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(const AndroidNotificationChannel(
-          'high_importance_channel',
+    flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation;
+
+    AndroidFlutterLocalNotificationsPlugin().createNotificationChannel(
+      const AndroidNotificationChannel(
+        'high_importance_channel',
         'High Importance Notifications',
         importance: Importance.high,
-      ));
+      ),
+    );
   } catch (e) {
-    print("Failed to initialize Firebase: $e");
+    log("Failed to initialize Firebase: $e");
   }
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -71,4 +87,6 @@ void main() async {
   );
 
   runApp(App());
+
+  FlutterNativeSplash.remove();
 }
