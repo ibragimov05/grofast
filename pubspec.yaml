@@ -87,6 +87,9 @@ dependencies:
   freezed_annotation: ^2.4.4
   freezed: ^2.5.7
 
+  # shared preferences
+  shared_preferences: ^2.3.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

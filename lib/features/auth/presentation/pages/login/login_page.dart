@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:grofast/core/extension/build_context_extension.dart';
-import 'package:grofast/core/theme/app_colors.dart';
-import 'package:grofast/core/utils/app_assets.dart';
-import 'package:grofast/core/utils/app_utils.dart';
-import 'package:grofast/core/utils/device_screen.dart';
-import 'package:grofast/core/widgets/grofast_button.dart';
-import 'package:grofast/core/widgets/grofast_text_from_field.dart';
-import 'package:grofast/core/widgets/zoom_tap_animation.dart';
-import 'package:grofast/features/auth/presentation/logic/cubit/login/login_cubit.dart';
-import 'package:grofast/router/app_router.dart';
-import 'package:grofast/services/log_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../logic/logic.dart';
+import '../../../../../core/core.dart';
+import '../../../../../router/app_router.dart';
+import '../../../../../services/services.dart';
 
 part 'widgets/login_page_private_widgets.dart';
 
@@ -24,43 +18,52 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
-  Widget build(BuildContext context) {
-    final double sH = DeviceScreen.h(context);
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: AppUtils.kPaddingHor24,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const _WelcomeBackText(),
-              SizedBox(
-                height: sH / 4,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _EmailAddressTextFormField(),
-                    _PasswordTextFormField(),
-                  ],
+  Widget build(BuildContext context) => GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          body: SafeArea(
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: const IntrinsicHeight(
+                    child: Padding(
+                      padding: AppUtils.kPaddingHor24,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              AppUtils.kGap24,
+                              _WelcomeBackText(),
+                              AppUtils.kGap32,
+                              _EmailAddressTextFormField(),
+                              AppUtils.kGap16,
+                              _PasswordTextFormField(),
+                              AppUtils.kGap24,
+                              _SignInButton(),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              AppUtils.kGap24,
+                              _OrWithText(),
+                              AppUtils.kGap16,
+                              _AuthenticateWithGoogle(),
+                              AppUtils.kGap24,
+                              _SignUpButton(),
+                              AppUtils.kGap24,
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(
-                height: sH / 4.5,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _SignInButton(),
-                    _OrWithText(),
-                    _AuthenticateWithGoogle(),
-                  ],
-                ),
-              ),
-              const _SignUp(),
-            ],
+            ),
           ),
         ),
-      ),
-    );
-  }
+      );
 }

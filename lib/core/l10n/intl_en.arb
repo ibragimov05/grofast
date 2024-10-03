@@ -12,5 +12,7 @@
   "orWith": "or with",
   "newUser": "New User?",
   "signUp": "Sign Up",
-  "signIn": "Sign in"
+  "signIn": "Sign in",
+  "enterValidEmail": "Enter valid email",
+  "enterYourPassword": "Enter your password"
 }

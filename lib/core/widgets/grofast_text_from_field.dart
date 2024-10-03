@@ -9,13 +9,13 @@ class GroFastTextFromField extends StatefulWidget {
   final bool isObscure;
   final String? hintText;
   final String labelText;
-  final String errorText;
+  final String? errorText;
   final Widget? prefixIcon;
   final String? initialValue;
   final bool canRequestFocus;
   final TextInputType keyboardType;
   final TextInputAction textInputAction;
-  final String? Function(String)? onChanged;
+  final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final List<TextInputFormatter> inputFormatters;
   final TextEditingController? textEditingController;
@@ -34,7 +34,7 @@ class GroFastTextFromField extends StatefulWidget {
     this.hintText,
     this.labelText = '',
     this.validator,
-    this.errorText = '',
+    this.errorText,
     this.prefixIcon,
   });
 
@@ -100,12 +100,12 @@ class _GroFastTextFromFieldState extends State<GroFastTextFromField> {
             ),
           ),
         ),
-        if (widget.errorText.isNotEmpty) ...[
+        if (widget.errorText != null) ...[
           AppUtils.kGap8,
           Padding(
             padding: AppUtils.kPaddingHor16,
             child: Text(
-              widget.errorText,
+              widget.errorText ?? '',
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w500,

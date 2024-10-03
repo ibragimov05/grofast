@@ -25,6 +25,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "dumpText": MessageLookupByLibrary.simpleMessage(
             "Lorem ipsum dolor sit amet, consectetur \nadipisicing elit, sed do eiusmod tempor \nincididunt ut labore et dolore."),
         "emailAddress": MessageLookupByLibrary.simpleMessage("Email address"),
+        "enterValidEmail":
+            MessageLookupByLibrary.simpleMessage("Enter valid email"),
+        "enterYourPassword":
+            MessageLookupByLibrary.simpleMessage("Enter your password"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot password?"),
         "freshGrocery": MessageLookupByLibrary.simpleMessage(
