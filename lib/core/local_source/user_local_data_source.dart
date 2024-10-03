@@ -1,21 +1,31 @@
 abstract interface class UserLocalDataSource {
-  Future<void> setAccessToken({required String accessToken});
+  /// [localID]
+  String get localID;
 
-  String get accessToken;
+  Future<void> setLocalId({required String localID});
 
-  Future<void> setRefreshToken({required String refreshToken});
-
-  String get refreshToken;
-
-  Future<void> setName({required String name});
-
-  String get name;
-
-  Future<void> setID({required String id});
-
-  String get id;
+  /// [email]
+  String get email;
 
   Future<void> setEmail({required String email});
 
-  String get email;
+  /// [idToken]
+  String get idToken;
+
+  Future<void> setIdToken({required String idToken});
+
+  /// [refreshToken]
+  String get refreshToken;
+
+  Future<void> setRefreshToken({required String refreshToken});
+
+  /// [expiresIn]
+  String get expiresIn;
+
+  Future<void> setExpiresIn({required String expiresIn});
+
+  /// [fullName]
+  String get fullName;
+
+  Future<void> setFullName({required String fullName});
 }

@@ -18,10 +18,9 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$AuthEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
@@ -29,9 +28,9 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
@@ -39,9 +38,9 @@ mixin _$AuthEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
@@ -107,7 +106,7 @@ abstract class _$$LoginEventImplCopyWith<$Res> {
           _$LoginEventImpl value, $Res Function(_$LoginEventImpl) then) =
       __$$LoginEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email, String password});
+  $Res call({AuthRequest request});
 }
 
 /// @nodoc
@@ -123,18 +122,13 @@ class __$$LoginEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
-    Object? password = null,
+    Object? request = null,
   }) {
     return _then(_$LoginEventImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      request: null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as AuthRequest,
     ));
   }
 }
@@ -142,16 +136,14 @@ class __$$LoginEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoginEventImpl implements LoginEvent {
-  const _$LoginEventImpl({required this.email, required this.password});
+  const _$LoginEventImpl({required this.request});
 
   @override
-  final String email;
-  @override
-  final String password;
+  final AuthRequest request;
 
   @override
   String toString() {
-    return 'AuthEvent.login(email: $email, password: $password)';
+    return 'AuthEvent.login(request: $request)';
   }
 
   @override
@@ -159,13 +151,11 @@ class _$LoginEventImpl implements LoginEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginEventImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.request, request) || other.request == request));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email, password);
+  int get hashCode => Object.hash(runtimeType, request);
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -178,43 +168,42 @@ class _$LoginEventImpl implements LoginEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
   }) {
-    return login(email, password);
+    return login(request);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
   }) {
-    return login?.call(email, password);
+    return login?.call(request);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
     if (login != null) {
-      return login(email, password);
+      return login(request);
     }
     return orElse();
   }
@@ -264,12 +253,10 @@ class _$LoginEventImpl implements LoginEvent {
 }
 
 abstract class LoginEvent implements AuthEvent {
-  const factory LoginEvent(
-      {required final String email,
-      required final String password}) = _$LoginEventImpl;
+  const factory LoginEvent({required final AuthRequest request}) =
+      _$LoginEventImpl;
 
-  String get email;
-  String get password;
+  AuthRequest get request;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -319,10 +306,9 @@ class _$GoogleAuthLoginImpl implements GoogleAuthLogin {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
@@ -333,9 +319,9 @@ class _$GoogleAuthLoginImpl implements GoogleAuthLogin {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
@@ -346,9 +332,9 @@ class _$GoogleAuthLoginImpl implements GoogleAuthLogin {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
@@ -414,7 +400,7 @@ abstract class _$$SignUpEventImplCopyWith<$Res> {
           _$SignUpEventImpl value, $Res Function(_$SignUpEventImpl) then) =
       __$$SignUpEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String fullName, String email, String password});
+  $Res call({String fullName, AuthRequest request});
 }
 
 /// @nodoc
@@ -431,22 +417,17 @@ class __$$SignUpEventImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fullName = null,
-    Object? email = null,
-    Object? password = null,
+    Object? request = null,
   }) {
     return _then(_$SignUpEventImpl(
       fullName: null == fullName
           ? _value.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      request: null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as AuthRequest,
     ));
   }
 }
@@ -454,19 +435,16 @@ class __$$SignUpEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SignUpEventImpl implements SignUpEvent {
-  const _$SignUpEventImpl(
-      {required this.fullName, required this.email, required this.password});
+  const _$SignUpEventImpl({required this.fullName, required this.request});
 
   @override
   final String fullName;
   @override
-  final String email;
-  @override
-  final String password;
+  final AuthRequest request;
 
   @override
   String toString() {
-    return 'AuthEvent.signUp(fullName: $fullName, email: $email, password: $password)';
+    return 'AuthEvent.signUp(fullName: $fullName, request: $request)';
   }
 
   @override
@@ -476,13 +454,11 @@ class _$SignUpEventImpl implements SignUpEvent {
             other is _$SignUpEventImpl &&
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.request, request) || other.request == request));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fullName, email, password);
+  int get hashCode => Object.hash(runtimeType, fullName, request);
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -495,43 +471,42 @@ class _$SignUpEventImpl implements SignUpEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
   }) {
-    return signUp(fullName, email, password);
+    return signUp(fullName, request);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
   }) {
-    return signUp?.call(fullName, email, password);
+    return signUp?.call(fullName, request);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
     required TResult orElse(),
   }) {
     if (signUp != null) {
-      return signUp(fullName, email, password);
+      return signUp(fullName, request);
     }
     return orElse();
   }
@@ -583,12 +558,10 @@ class _$SignUpEventImpl implements SignUpEvent {
 abstract class SignUpEvent implements AuthEvent {
   const factory SignUpEvent(
       {required final String fullName,
-      required final String email,
-      required final String password}) = _$SignUpEventImpl;
+      required final AuthRequest request}) = _$SignUpEventImpl;
 
   String get fullName;
-  String get email;
-  String get password;
+  AuthRequest get request;
 
   /// Create a copy of AuthEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -666,10 +639,9 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
@@ -680,9 +652,9 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
@@ -693,9 +665,9 @@ class _$ResetPasswordEventImpl implements ResetPasswordEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
@@ -807,10 +779,9 @@ class _$CheckTokenExpiryEventImpl implements CheckTokenExpiryEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
@@ -821,9 +792,9 @@ class _$CheckTokenExpiryEventImpl implements CheckTokenExpiryEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
@@ -834,9 +805,9 @@ class _$CheckTokenExpiryEventImpl implements CheckTokenExpiryEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,
@@ -937,10 +908,9 @@ class _$LogoutEventImpl implements LogoutEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email, String password) login,
+    required TResult Function(AuthRequest request) login,
     required TResult Function() googleAuth,
-    required TResult Function(String fullName, String email, String password)
-        signUp,
+    required TResult Function(String fullName, AuthRequest request) signUp,
     required TResult Function(String email) resetPassword,
     required TResult Function() checkTokenExpiry,
     required TResult Function() logOut,
@@ -951,9 +921,9 @@ class _$LogoutEventImpl implements LogoutEvent {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email, String password)? login,
+    TResult? Function(AuthRequest request)? login,
     TResult? Function()? googleAuth,
-    TResult? Function(String fullName, String email, String password)? signUp,
+    TResult? Function(String fullName, AuthRequest request)? signUp,
     TResult? Function(String email)? resetPassword,
     TResult? Function()? checkTokenExpiry,
     TResult? Function()? logOut,
@@ -964,9 +934,9 @@ class _$LogoutEventImpl implements LogoutEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email, String password)? login,
+    TResult Function(AuthRequest request)? login,
     TResult Function()? googleAuth,
-    TResult Function(String fullName, String email, String password)? signUp,
+    TResult Function(String fullName, AuthRequest request)? signUp,
     TResult Function(String email)? resetPassword,
     TResult Function()? checkTokenExpiry,
     TResult Function()? logOut,

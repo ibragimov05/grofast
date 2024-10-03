@@ -1,11 +1,11 @@
-class AuthResponse {
+class UserSecrets {
   final String localId;
   final String email;
   final String idToken;
   final String refreshToken;
   final DateTime expiresIn;
 
-  const AuthResponse({
+  const UserSecrets({
     required this.localId,
     required this.email,
     required this.idToken,
@@ -13,7 +13,7 @@ class AuthResponse {
     required this.expiresIn,
   });
 
-  factory AuthResponse.fromJson(Map<String, dynamic> json) => AuthResponse(
+  factory UserSecrets.fromJson(Map<String, dynamic> json) => UserSecrets(
         localId: json['localId'] as String,
         email: json['email'] as String,
         idToken: json['idToken'] as String,

@@ -3,16 +3,14 @@ part of 'auth_bloc.dart';
 @freezed
 class AuthEvent with _$AuthEvent {
   const factory AuthEvent.login({
-    required String email,
-    required String password,
+    required AuthRequest request,
   }) = LoginEvent;
 
   const factory AuthEvent.googleAuth() = GoogleAuthLogin;
 
   const factory AuthEvent.signUp({
     required String fullName,
-    required String email,
-    required String password,
+    required AuthRequest request,
   }) = SignUpEvent;
 
   const factory AuthEvent.resetPassword({

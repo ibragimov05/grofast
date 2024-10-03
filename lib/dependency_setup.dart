@@ -5,11 +5,23 @@ import 'package:get_it/get_it.dart';
 import 'package:flutter/foundation.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:grofast/features/auth/presentation/logic/cubit/login/login_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'core/local_source/local_source.dart';
 
 final GetIt getIt = GetIt.instance;
 
+final LocalSource localSource = getIt.get<LocalSource>();
+
 class DependencySetup {
-  static void init() {
+  static Future<void> init() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+
+    getIt.registerSingleton<LocalSource>(
+      LocalSource(sharedPreferences: sharedPreferences),
+    );
+
     getIt.registerLazySingleton(
       () => Dio()
         ..options = BaseOptions(
