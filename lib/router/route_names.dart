@@ -1,8 +1,9 @@
 part of 'app_router.dart';
 
 sealed class Routes {
-  Routes._();
+  const Routes._();
 
+  static const String splash = '/';
   static const String onboarding = '/onboarding';
 
   static const String login = '/login';

@@ -85,16 +85,21 @@ class _SignInButton extends StatelessWidget {
   const _SignInButton();
 
   @override
-  Widget build(BuildContext context) {
-    final isValid = context.select(
-      (LoginCubit cubit) => cubit.state.isValid,
-    );
-
-    return GrofastButton(
-      buttonLabel: context.localization.signIn,
-      onTap: isValid ? () {} : null,
-    );
-  }
+  Widget build(BuildContext context) => BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) => GrofastButton(
+          buttonLabel: context.localization.signIn,
+          onTap: state.isValid
+              ? () => context.read<AuthBloc>().add(
+                    AuthEvent.login(
+                      request: AuthRequest(
+                        email: state.email.value,
+                        password: state.password.value,
+                      ),
+                    ),
+                  )
+              : null,
+        ),
+      );
 }
 
 class _OrWithText extends StatelessWidget {

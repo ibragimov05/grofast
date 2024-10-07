@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:grofast/core/extension/build_context_extension.dart';
+import 'package:grofast/core/extension/size_extension.dart';
 import 'package:grofast/core/theme/app_colors.dart';
 import 'package:grofast/core/utils/app_assets.dart';
 import 'package:grofast/core/utils/app_utils.dart';
-import 'package:grofast/core/utils/device_screen.dart';
 import 'package:grofast/core/widgets/zoom_tap_animation.dart';
+import 'package:grofast/dependency_setup.dart';
 import 'package:grofast/router/app_router.dart';
 
 import '../../../../core/custom_painter/custom_painter.dart';
@@ -15,8 +16,8 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double sW = DeviceScreen.w(context);
-    final double sH = DeviceScreen.h(context);
+    final double sW = context.width;
+    final double sH = context.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -61,7 +62,12 @@ class OnboardingPage extends StatelessWidget {
                       borderRadius: AppUtils.kBorderRadius64,
                     ),
                     child: ZoomTapAnimation(
-                      onTap: () => context.go(Routes.login),
+                      onTap: () {
+                        context.go(Routes.login);
+                        localSource.setIsOnboardingLocalePassed(
+                          isOnboardingLocalePassed: true,
+                        );
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: AppUtils.kBorderRadius64,

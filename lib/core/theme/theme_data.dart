@@ -11,7 +11,7 @@ final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   textSelectionTheme: TextSelectionThemeData(
     selectionHandleColor: AppColors.c32CB4B,
-    selectionColor: AppColors.c32CB4B.withOpacity(0.3),
+    selectionColor: AppColors.c32CB4B.withOpacity(0.2),
     cursorColor: AppColors.c32CB4B,
   ),
   pageTransitionsTheme: const PageTransitionsTheme(
@@ -33,8 +33,8 @@ final ThemeData lightTheme = ThemeData(
     backButtonIconBuilder: (BuildContext context) => IconButton(
       onPressed: () => Navigator.maybePop(context),
       icon: Platform.isAndroid
-          ? const Icon(Icons.arrow_back)
-          : const Icon(Icons.arrow_back_ios_new_rounded),
+          ? Icon(Icons.arrow_back, color: AppColors.c777777)
+          : Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.c777777),
     ),
   ),
 );

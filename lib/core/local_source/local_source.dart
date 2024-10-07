@@ -1,9 +1,12 @@
+import 'package:grofast/core/local_source/onboarding_local_data_source.dart';
 import 'package:grofast/core/local_source/user_local_data_source.dart';
 import 'package:grofast/core/local_source/preference_dao/preference_dao.dart';
 
-final class LocalSource extends PreferenceDao implements UserLocalDataSource {
+final class LocalSource extends PreferenceDao
+    implements UserLocalDataSource, OnboardingLocalDataSource {
   const LocalSource({required super.sharedPreferences});
 
+  /// *** [UserLocalDataSource] entry ***
   PreferenceEntry<String> get _emailKey => stringEntry(key: 'user.email');
 
   PreferenceEntry<String> get _idTokenKey => stringEntry(key: 'user.id_token');
@@ -19,7 +22,12 @@ final class LocalSource extends PreferenceDao implements UserLocalDataSource {
   PreferenceEntry<String> get _fullNameKey =>
       stringEntry(key: 'user.full_name');
 
+  /// *** [OnboardingLocalDataSource] entry ***
+  PreferenceEntry<bool> get _isOnboardingPassed =>
+      boolEntry(key: 'settings.is_onboarding_passed');
+
   /// *** GETTERS ***
+  /// [UserLocalDataSource]
   @override
   String get email => _emailKey.read() ?? '';
 
@@ -38,7 +46,12 @@ final class LocalSource extends PreferenceDao implements UserLocalDataSource {
   @override
   String get fullName => _fullNameKey.read() ?? '';
 
-  /// *** Setters ***
+  /// *** [OnboardingLocalDataSource] ***
+  @override
+  bool get isOnboardingLocalePassed => _isOnboardingPassed.read() ?? false;
+
+  /// *** SETTERS ***
+  /// *** [UserLocalDataSource] ***
   @override
   Future<void> setEmail({required String email}) async =>
       await _emailKey.set(email);
@@ -63,7 +76,14 @@ final class LocalSource extends PreferenceDao implements UserLocalDataSource {
   Future<void> setFullName({required String fullName}) async =>
       await _fullNameKey.set(fullName);
 
-  Future<void> clearAllData() async => await Future.wait([
+  /// *** [OnboardingLocalDataSource] ***
+  @override
+  Future<void> setIsOnboardingLocalePassed({
+    required bool isOnboardingLocalePassed,
+  }) async =>
+      await _isOnboardingPassed.set(isOnboardingLocalePassed);
+
+  Future<void> clearUserData() async => await Future.wait([
         _emailKey.remove(),
         _idTokenKey.remove(),
         _localIDKey.remove(),
@@ -71,4 +91,12 @@ final class LocalSource extends PreferenceDao implements UserLocalDataSource {
         _expiresInKey.remove(),
         _refreshTokenKey.remove(),
       ]);
+
+  Future<void> clearAllData() async {
+    throw UnimplementedError();
+
+    // await Future.wait(
+    //   [],
+    // );
+  }
 }

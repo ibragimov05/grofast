@@ -24,7 +24,7 @@ void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  DependencySetup.init();
+  await DependencySetup.init();
 
   try {
     await Firebase.initializeApp(

@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:grofast/core/core.dart';
+import 'package:grofast/dependency_setup.dart';
 import 'package:grofast/features/auth/data/models/auth/user_secrets.dart';
 import 'package:grofast/features/auth/data/models/auth/login_request.dart';
 import 'package:grofast/services/log_service.dart';
@@ -18,5 +19,5 @@ sealed class AuthRepository {
     required AuthRequest request,
   });
 
-  Future<Either<Failure, UserSecrets?>> checkTokenExpiry();
+  Future<Either<Failure, bool>> checkTokenExpiry();
 }

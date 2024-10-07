@@ -93,7 +93,56 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<Either<Failure, UserSecrets?>> checkTokenExpiry() async {
-    throw UnimplementedError();
+  Future<Either<Failure, bool>> checkTokenExpiry() async {
+    try {
+      final expiresIn = localSource.expiresIn;
+
+      if (expiresIn.isEmpty) {
+        return const Right<Failure, bool>(false);
+      }
+
+      final expiresInDateTime = DateTime.parse(localSource.expiresIn);
+
+      if (DateTime.now().isBefore(expiresInDateTime)) {
+        return const Right<Failure, bool>(true);
+      } else {
+        final newUser = await _refreshToken;
+        return const Right<Failure, bool>(true);
+        // final updateUser = await _refreshToken(user)
+      }
+    } catch (error, stacktrace) {
+      LogService.e('Exception occurred: $error stacktrace: $stacktrace');
+
+      return Left<Failure, bool>(Error.throwWithStackTrace(error, stacktrace));
+    }
+  }
+
+  Future<UserSecrets> _refreshToken({required String refreshToken}) async {
+    final String url =
+        "https://securetoken.googleapis.com/v1/token?key=$_firebaseApiKey";
+
+    try {
+      final response = await _dio.post(
+        url,
+        data: {
+          "grant_type": "refresh_token",
+          "refresh_token": refreshToken,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final data = response.data;
+
+        return UserSecrets.fromJson(data);
+      } else {
+        throw Exception(response.data['error']['message']);
+      }
+    } on DioException catch (e) {
+      final errorMessage =
+          e.response?.data['error']['message'] ?? 'Failed to refresh token';
+      throw Exception(errorMessage);
+    } catch (e) {
+      throw Exception('Unexpected error: ${e.toString()}');
+    }
   }
 }

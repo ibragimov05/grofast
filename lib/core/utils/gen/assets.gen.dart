@@ -15,6 +15,10 @@ import 'package:vector_graphics/vector_graphics.dart' as _vg;
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow-right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow-right.svg');
+
   /// File path: assets/icons/arrow_forward.svg
   SvgGenImage get arrowForward =>
       const SvgGenImage('assets/icons/arrow_forward.svg');
@@ -39,8 +43,16 @@ class $AssetsIconsGen {
       const SvgGenImage('assets/icons/password_lock.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [arrowForward, email, eyeOff, eyeOn, google, grofast, passwordLock];
+  List<SvgGenImage> get values => [
+        arrowRight,
+        arrowForward,
+        email,
+        eyeOff,
+        eyeOn,
+        google,
+        grofast,
+        passwordLock
+      ];
 }
 
 class $AssetsImagesGen {

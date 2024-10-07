@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grofast/core/core.dart';
+import 'package:grofast/dependency_setup.dart';
 import 'package:grofast/features/auth/data/models/auth/login_request.dart';
 import 'package:grofast/features/auth/data/models/auth/user_secrets.dart';
 import 'package:grofast/features/auth/domain/repository/auth_repository.dart';
@@ -44,7 +45,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         error: left.message,
       )),
       (UserSecrets r) async {
-        
+        await Future.wait(
+          [
+            localSource.setEmail(email: r.email),
+            localSource.setLocalId(localID: r.localId),
+            localSource.setIdToken(idToken: r.idToken),
+            localSource.setRefreshToken(refreshToken: r.refreshToken),
+            localSource.setExpiresIn(expiresIn: r.expiresIn.toIso8601String()),
+          ],
+        );
+
         emit(state.copyWith(authStatus: AuthStatus.authenticated));
       },
     );
@@ -76,6 +86,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     emit(state.copyWith(authStatus: AuthStatus.loading));
+
+
   }
 
   Future<void> _onLogOut(

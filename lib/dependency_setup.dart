@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/foundation.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:grofast/features/auth/domain/repository/auth_repository.dart';
+import 'package:grofast/features/auth/presentation/logic/bloc/auth/auth_bloc.dart';
 import 'package:grofast/features/auth/presentation/logic/cubit/login/login_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,8 +46,16 @@ class DependencySetup {
     );
 
     getIt.registerLazySingleton(() => Connectivity());
+    getIt.registerLazySingleton(
+      () => AuthRepositoryImpl(dio: getIt.get<Dio>()),
+    );
 
     /// registering blocs
+    getIt.registerLazySingleton(
+      () => AuthBloc(
+        authRepository: getIt.get<AuthRepositoryImpl>(),
+      ),
+    );
 
     /// registering cubits
     getIt.registerLazySingleton(() => LoginCubit());
